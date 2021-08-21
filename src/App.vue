@@ -25,12 +25,6 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Consultar Registro</a>
             </li>
-            <li class="nav-item">
-              <router-link to="/registrar" class="nav-link" href="#">Registrar Vacunación</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/consultar" class="nav-link" href="#">Consultar Registro</router-link>
-            </li>
           </ul>
           <form class="d-flex">
             <input
