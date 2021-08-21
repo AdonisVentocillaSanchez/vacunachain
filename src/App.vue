@@ -42,19 +42,18 @@
     </nav>
 
     <RegisterVaccine title="Registra un nuevo paciente" />
-    <ListVaccine title="dg" />
   </div>
 </template>
 
 <script>
 import RegisterVaccine from "./components/RegisterVaccine.vue";
-import ListVaccine from "./components/ListVaccine.vue";
+// import ListVaccine from "./components/ListVaccine.vue";
 
 export default {
   name: "App",
   components: {
     RegisterVaccine,
-    ListVaccine
+    // ListVaccine
   }
 };
 </script>
