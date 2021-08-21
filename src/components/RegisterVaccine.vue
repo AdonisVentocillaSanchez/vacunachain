@@ -158,25 +158,11 @@ export default {
   },
   data() {
     return {
-      // data paciente
-      tipodoc: "",
-      nrodoc: "",
-      firstname: "",
-      lastname1: "",
-      lastname2: "",
-      phone: "",
-      // data vacuna
-      VaccineBrand: "",
-      VaccinationSite: "",
-      datetime: "",
-      dosis: 1,
-      // data doc
-      tipodoc_doc: "",
-      nrodoc_doc: "",
-      firstname_doc: "",
-      lastname1_doc: "",
-      lastname2_doc: "",
+      tipodoc:'',
+      tipodoc_doc:'',
       // desde aca
+      registro:[],
+      bodyData:[],
       RegistroVacunas: {
         FechaNacimiento: "",
         Nombres: "",
@@ -201,25 +187,42 @@ export default {
   },
   methods: {
     addPaciente: function() {
-      console.log("click p mano");
-      this.getDataDNI(this.nrodoc);
-    },
-    getDataDNI(dni) {
-      console.log(dni);
-      const URLgetDNI = "https://dni.optimizeperu.com/api/prod/persons/";
-      const TOKEN = "k4d2956bd531ab61d44f4fa07304b20e13913815";
-      axios
-        .create({
-          baseURL: URLgetDNI,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "token " + TOKEN
+      this.registro = {
+        RegistroVacunas: {
+        FechaNacimiento: this.RegistroVacunas.FechaNacimiento,
+        Nombres: this.RegistroVacunas.Nombres,
+        ApellidoPaterno: this.RegistroVacunas.ApellidoPaterno,
+        ApellidoMaterno: this.RegistroVacunas.ApellidoMaterno,
+        NumeroDocumento: this.RegistroVacunas.NumeroDocumento,
+        Telefono: this.RegistroVacunas.Telefono,
+        Dosis: {
+          numeroDosis: 1,
+          LugarVacunacion: this.RegistroVacunas.Dosis.LugarVacunacion,
+          MarcaVacuna: this.RegistroVacunas.Dosis.MarcaVacuna,
+          FechaVacunacion: this.RegistroVacunas.Dosis.FechaVacunacion,
+          Tecnica: {
+            Nombres: this.RegistroVacunas.Tecnica.Nombres,
+            ApellidoPaterno: this.RegistroVacunas.Tecnica.ApellidoPaterno,
+            ApellidoMaterno: this.RegistroVacunas.Tecnica.ApellidoMaterno,
+            NumeroDocumento: this.RegistroVacunas.Tecnica.NumeroDocumento
           }
-        })
-        .get(dni)
-        .then(res => {
-          console.log(res);
-        });
+        }
+      }
+      };
+      console.log(this.registro);
+      this.bodyData = {
+        name:"RegisterTest",
+        comentario:this.registro,
+        primeraDosis:{
+          NumeroDocumento: this.RegistroVacunas.NumeroDocumento
+        }
+      }
+      console.log(this.RegistroVacunas.NumeroDocumento);
+      const URLpostData = "https://hack-unmsm.herokuapp.com/api/v1/data-blockchain";
+      axios.post(URLpostData, this.bodydata)
+      .then(data => {
+        console.log(data);
+      })
     }
   }
 };
